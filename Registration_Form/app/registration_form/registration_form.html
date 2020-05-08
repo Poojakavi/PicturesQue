@@ -1,0 +1,232 @@
+<div layout="column" class="picturesQueRegister">
+  <form name="picturesQueRegistration" class="picturesQueRegister">
+    <div class="picturesQueRegister">
+      <md-tabs class="md-primary" md-center-tabs md-selected="selfIndex.selectedIndex">
+        <md-tab md-on-select="selfIndex.selectedIndex = 0">
+          <md-tab-label layout="row">
+            <div class="tabCount selectedTab" ng-if="selfIndex.selectedIndex === 0">1</div>
+            <div class="tabCount selectedTab"
+              ng-if="selfIndex.selectedIndex === 1 || selfIndex.selectedIndex === 2"><i
+                class="fa fa-check" aria-hidden="true"></i></div>
+            <span class="tabPadding">{{$root.constant.en.personalDetails}}</span>
+          </md-tab-label>
+          <md-tab-body class="tabContent">
+            <md-content class="md-padding">
+              <h1 class="md-display-1">{{$root.constant.en.addPersonalDetails}}</h1>
+              <div class="descriptionText paddingBottom20">{{$root.constant.en.companyDiscription}}</div>
+              <div layout="column" layout-align="center center">
+                <div layout="column" class="registrationForm">
+                  <div class="width450 paddingBottom">{{$root.constant.en.fullName}}</div>
+                  <input name="name" class="fieldInput borderFocused" ng-model="picturesQueDetails.fullName" type="text"
+                    required>
+                  <span ng-if="picturesQueRegistration.name.$touched && picturesQueRegistration.name.$invalid ||
+                   picturesQueRegistration.$submitted" class="errorValidation">Name is Required</span>
+                </div>
+                <div layout="column" class="formBackground">
+                  <div class="width450 paddingBottom">{{$root.constant.en.gender}}</div>
+                  <div layout="row" class="positionRelative" layout-align="start center">
+                    <div ng-repeat="gender in genderTypes track by $index">
+                      <button class="genderTypeButton genderButton" ng-model="picturesQueDetails.requestType"
+                        type="button" ng-click="getGenderType($index)" required name="genderTypeValue"
+                        ng-class="{'selectedGenderType': gender.isSelectedGenderType}">{{gender.type}}</button>
+                    </div>
+                  </div>
+                </div>
+                <div layout="column" class="formBackground">
+                  <div class="width450 paddingBottom">{{$root.constant.en.country}}</div>
+                  <md-input-container>
+                    <md-select name="countryDetails" ng-model="picturesQueDetails.countryName" class="countrySelect"
+                      required md-no-asterisk id="countryName">
+                      <md-option ng-value="country" ng-repeat="country in countryDetails track by $index"
+                        ng-click="selectState($index,country)">
+                        <img ng-src={{country.flag}} class="countryFlag marginRight10">{{ country.name }}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <span ng-if="picturesQueRegistration.countryDetails.$error.required && picturesQueRegistration.countryDetails.$touched||
+                  picturesQueRegistration.$submitted" class="errorValidation">Country is required</span>
+                </div>
+                <div layout="column" class="formBackground">
+                  <div class="width450 paddingBottom">{{$root.constant.en.state}}</div>
+                  <md-input-container>
+                    <md-select ng-model="picturesQueDetails.stateName" class="countrySelect"
+                      ng-disabled="isShowStateField"  md-no-asterisk id="stateSelector" name="stateDetails">
+                      <md-option ng-value="state" ng-repeat="state in selectedCountryState track by $index">
+                        {{state}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <span ng-if="picturesQueRegistration.stateDetails.$error.required && picturesQueRegistration.stateDetails.$touched||
+                  picturesQueRegistration.$submitted" class="errorValidation">State is required</span>
+                </div>
+                <div layout="column" class="formBackground">
+                  <div class="width450 paddingBottom">{{$root.constant.en.phone}}</div>
+                  <div layout="row" class="priceFieldInitial">
+                    <div flex="20" class="phoneNumberInput" ng-class="{'phoneNumberInputBorder': isNumberEntered}"
+                      layout="row" layout-align="start center">
+                      <img ng-src={{selectedCountryFlag}} ng-show="selectedCountryFlag"
+                        class="phoneNumberFlag marginRight10">
+                      <div ng-show="selectedCountryFlag">{{code}}{{callingCode}}</div>
+                    </div>
+                    <div flex="80">
+                      <input class="numberSize fieldInput phoneNumberBorder" type="number" name="phoneNo"
+                        ng-model="picturesQueDetails.phoneNumber" autocomplete="off" ng-blur="removeBorder()"
+                        ng-focus="changeBorder()" id="phoneNumber" minlength="6" maxlength="15" required>
+                    </div>
+                  </div>
+                  <span
+                    ng-if="picturesQueRegistration.phoneNo.$error.minlength && picturesQueRegistration.phoneNo.$error.maxlength && picturesQueRegistration.stateDetails.$touched"
+                    class="errorValidation">Please enter valid phone number</span>
+                  <span
+                    ng-if="picturesQueRegistration.phoneNo.$error.maxlength || picturesQueRegistration.phoneNo.$error.minlength"
+                    class="errorValidation">Enter valid number</span>
+                </div>
+                <div class="formBackground paddingBottom20" layout="row" layout-align="center center">
+                  <button class="nextButton width450" type="button" ng-click="companyDetialsTab()"
+                    ng-disabled="!(picturesQueRegistration.name.$valid && picturesQueRegistration.genderTypeValue &&
+                    picturesQueRegistration.countryDetails.$valid  && picturesQueRegistration.phoneNo.$valid)">{{$root.constant.en.next}}</button>
+                </div>
+                <div layout="row" layout-align="center center" class="width450 marginTop15">
+                  <div flex="40">{{$root.constant.en.accountMessage}}</div>
+                  <div flex="2"></div>
+                  <div class="formattedTextColor" flex="48" ng-click="personalDetailsTab()">{{$root.constant.en.logIn}}
+                  </div>
+                </div>
+            </md-content>
+          </md-tab-body>
+        </md-tab>
+        <md-tab md-on-select="selfIndex.selectedIndex = 1"
+          ng-disabled="!(picturesQueRegistration.name.$valid && picturesQueRegistration.genderTypeValue &&
+        picturesQueRegistration.countryDetails.$valid && picturesQueRegistration.stateDetails.$valid && picturesQueRegistration.phoneNo.$valid)">
+          <md-tab-label layout="row">
+            <div class="tabCount selectedTab"  ng-if="selfIndex.selectedIndex === 0 || selfIndex.selectedIndex === 1">2</div>
+            <div class="tabCount selectedTab"
+              ng-if="selfIndex.selectedIndex === 2"><i
+                class="fa fa-check" aria-hidden="true"></i></div>
+            <span class="tabPadding" >{{$root.constant.en.companyDetails}}</span>
+          </md-tab-label>
+          <md-tab-body>
+            <md-content class="md-padding">
+              <h1 class="md-display-1">{{$root.constant.en.addCompanyDetails}}</h1>
+              <div class="descriptionText paddingBottom20">{{$root.constant.en.companyDiscription}}</div>
+              <div layout="column" layout-align="center center" flex>
+                <div layout="row" class="registrationForm" layout-align="center cneter">
+                  <div class="circle"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
+                  <div class="formattedTextColor width450 " layout="row" layout-align="center center">
+                    {{$root.constant.en.companyLogo}}</div>
+                </div>
+                <div layout="column" class="formBackground ">
+                  <div class="width450 paddingBottom">{{$root.constant.en.companyName}}</div>
+                  <input name="companyName" class="fieldInput borderFocused" ng-model="picturesQueDetails.companyName"
+                    type="text" required>
+                  <span
+                    ng-if="picturesQueRegistration.companyName.$invalid && picturesQueRegistration.companyName.$touched"
+                    class="errorValidation">Enter only text</span>
+                </div>
+                <div layout="column" class="formBackground ">
+                  <div class="width450 paddingBottom">{{$root.constant.en.emailId}}</div>
+                  <input name="email" class="fieldInput borderFocused" ng-model="picturesQueDetails.emailId"
+                    type="email" required>
+                  <span ng-if="picturesQueRegistration.email.$invalid && picturesQueRegistration.email.$touched"
+                    class="errorValidation">Please enter valid
+                    email</span>
+                </div>
+                <div layout="column" class="formBackground ">
+                  <div class="width450 paddingBottom">{{$root.constant.en.jobTitle}}</div>
+                  <input name="designation" class="fieldInput borderFocused" ng-model="picturesQueDetails.jobTitle"
+                    type="text" required>
+                  <span
+                    ng-if="picturesQueRegistration.designation.$invalid && picturesQueRegistration.designation.$touched"
+                    class="errorValidation">Enter only text</span>
+                </div>
+                <div layout="column" class="formBackground ">
+                  <div class="width450 paddingBottom">{{$root.constant.en.yearsOfExperience}}</div>
+                  <input name="years" class="fieldInput borderFocused" ng-model="picturesQueDetails.experience"
+                    maxlength="2" type="number" required>
+                  <span ng-if="picturesQueRegistration.years.$invalid && picturesQueRegistration.years.$touched"
+                    class="errorValidation">Enter only numbers</span>
+                  <span ng-if="picturesQueRegistration.years.$invalid && picturesQueRegistration.years.$error.maxlength"
+                    class="errorValidation">Maximum two digits</span>
+                </div>
+                <div layout="row" class="formBackground checkItems">
+                  <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="picturesQueDetails.termsAndConditions"
+                    class="md-primary">
+                  </md-checkbox>
+                  <div class="conditionsApply">I accept the <span class="formattedTextColor">Terms and Conditions</span>
+                  </div>
+                </div>
+                <div layout="row" class="formBackground" layout-align="start center">
+                  <div>
+                    <button class="backButton" type="button"
+                      ng-click="personalDetailsTab()">{{$root.constant.en.back}}</button></div>
+                  <div><button class="sendButton" type="button"
+                      ng-disabled="!(picturesQueRegistration.years.$valid && picturesQueRegistration.designation
+                    && picturesQueRegistration.email.$valid && picturesQueRegistration.companyName && picturesQueDetails.termsAndConditions)"
+                      ng-click="otpTab()">{{$root.constant.en.send}}</button></div>
+                </div>
+              </div>
+            </md-content>
+          </md-tab-body>
+        </md-tab>
+        <md-tab label="Email Verification" md-on-select="selfIndex.selectedIndex = 2" ng-disabled="!(picturesQueRegistration.years.$valid && picturesQueRegistration.designation
+        && picturesQueRegistration.email.$valid && picturesQueRegistration.companyName)">
+          <md-tab-label layout="row">
+            <div class="tabCount selectedTab">3</div>
+            <span class="tabPadding">{{$root.constant.en.emailVerification}}</span>
+          </md-tab-label>
+          <md-tab-body>
+            <md-content class="md-padding">
+              <div layout="column" layout-align="center center">
+                <h1 class="md-display-1">{{$root.constant.en.enter}}</h1>
+                <div class="descriptionText">{{$root.constant.en.securityMessage}}</div>
+                <div class="descriptionText paddingBottom20">code to <strong>{{$root.constant.en.domain}}</strong>.
+                  Please enter it
+                  below.</div>
+              </div>
+              <div layout="column" layout-align="center center" flex>
+                <div layout="column" class="registrationForm">
+                  <div class="width450 paddingBottom">{{$root.constant.en.enterCode}}</div>
+                  <div layout="row" layout-align="start center" class="width450 paddingBottom">
+                    <div flex="20" class="marginRight30 otpHeight"><input name="otp1" class="borderFocused otpField"
+                        ng-model="picturesQueDetails.otp.digit1" type="number" required maxlength="1">
+                    </div>
+                    <div flex="20" class="marginRight30 otpHeight"><input name="otp2" class="borderFocused otpField"
+                        ng-model="picturesQueDetails.otp.digit2" type="number" required maxlength="1">
+                    </div>
+                    <div flex="20" class="marginRight30 otpHeight"><input name="otp3" class="borderFocused otpField"
+                        ng-model="picturesQueDetails.otp.digit3" type="number" required maxlength="1">
+                    </div>
+                    <div flex="20" class="marginRight30 otpHeight"><input name="otp4" class="borderFocused otpField"
+                        ng-model="picturesQueDetails.otp.digit4" type="number" required maxlength="1">
+                    </div>
+                    <div flex="20" class="otpHeight"><input name="otp5" class="borderFocused otpField"
+                        ng-model="picturesQueDetails.otp.digit5" type="number" required maxlength="1">
+                    </div>
+                  </div>{{picturesQueDetails.otp.digit1.$error}}
+                  <div><span ng-if="picturesQueRegistration.otp1.$error.maxlength 
+                    || picturesQueRegistration.otp2.$error.maxlength || picturesQueRegistration.otp3.$error.maxlength 
+                    || picturesQueRegistration.otp4.$error.maxlength || picturesQueRegistration.otp5.$error.maxlength"
+                      class="errorValidation">Maximun one digit</span></div>
+                </div>
+                <div layout="row" class="formBackground paddingBottom20" layout-align="start center">
+                  <div>
+                    <button class="backButton" type="button"
+                      ng-click="companyDetialsTab()">{{$root.constant.en.back}}</button></div>
+                  <div><button class="sendButton" type="submit"
+                      ng-click="verifyDetails(); getSuccessStateTemplate('registration_success');">{{$root.constant.en.verify}}</button>
+                  </div>
+                </div>
+                <div class="divider messageWidth"></div>
+                <div layout="column" layout-align="center center" class="messageWidth paddingBottom formBackground">
+                  <div class="descriptionText">{{$root.constant.en.otpErrorMessage}}</div>
+                  <div class="descriptionText paddingBottom20">{{$root.constant.en.from}}
+                    <strong>{{$root.constant.en.domain}}</strong></div>
+                </div>
+              </div>
+            </md-content>
+          </md-tab-body>
+        </md-tab>
+      </md-tabs>
+    </div>
+    <div></div>
+  </form>
+
+</div>

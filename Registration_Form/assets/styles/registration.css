@@ -1,0 +1,293 @@
+.picturesQueRegister{
+    margin: 0 auto;
+    height: 100%;
+    width: 100%; 
+}
+md-tabs md-tabs-wrapper{
+    background-color: #2e4b64 !important;
+}
+.countrySelect :disabled, .successMessage{
+    background-color: white !important;
+    border-radius: 4px;
+}
+.md-tab.md-disabled{
+    color: #bbb !important;
+}
+md-ink-bar{
+    display: none;
+}
+md-ripple-container{
+    color: white !important;
+}
+.tabCount{
+    height: 25px;
+    width: 25px;
+    background-color:#28435a;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center; 
+}
+md-tabs{
+    height: 100%;
+}
+.tabPadding{
+    padding-left: 15px;
+}
+.md-tab.md-active .selectedTab,md-checkbox.md-checked .md-icon{
+    background-color: #ed5901 !important;
+}
+h1, .descriptionText{
+    text-align: center;  
+}
+.descriptionText{
+    font-family: sans-serif;   
+}
+.paddingBottom20{
+    padding-bottom: 20px !important;
+}
+.tabContent,md-tab-content{
+    background-color: #f9fafa !important;
+}
+.registrationForm{
+    background-color: white;
+    padding: 30px 30px 0px 30px;
+}
+.width450{
+    width: 450px;
+}
+.paddingBottom{
+    padding-bottom: 10px;
+}
+h5{
+    padding: 0px 36px;
+}
+.fa{
+    font-size: 80px !important;
+}
+.fieldInput{
+    padding: 5px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 6px 10px;
+    box-sizing: border-box;
+}
+.phoneNumberBorder{
+    border-radius: 0px 4px 0px 0px !important;
+}
+.paddingTop20{
+    padding-top: 20px;
+}
+.formBackground{
+    background-color: white;
+    padding: 10px 30px 0px 30px;
+}
+.errorValidation{
+    margin-top: 5px;
+    font-size: 10px;
+    color: red;
+}
+.circle{
+    border-radius: 50%;
+    width: 0px;
+    height: 100px;   
+}
+.marginTop15{
+    margin-top: 15px;
+}
+.fa-check{
+    font-size: 15px !important;
+}
+.genderButton{
+    min-width: 90px !important;
+    margin: 0px 15px 0px 0 !important;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;    
+    border: 1px solid #bbb !important;
+    border-radius: 3px;
+    background-color: white;   
+}
+.countrySelect{    
+    border: 1px solid #bbb;
+    background-color: white;
+    border-radius: 3px !important;
+    box-sizing: border-box;
+}
+#stateSelector{
+    padding-left: 10px;
+}
+.phoneNumberInput{
+    font-size: 15px;
+    height: 34px;
+    width: 30px;
+    padding: 5px 9px;
+    border: 1px solid #bbb;
+    border-radius: 3px 0 0 3px;
+    border-right:none;
+}
+.phoneNumberInputBorder{
+    border-top: 1px solid #ed5901;
+    border-bottom: 1px solid #ed5901;
+    border-left: 1px solid #ed5901;
+    border-right: none !important;
+}
+md-select{
+    margin: 0!important;   
+}
+#countryName{
+    padding: 2px;
+}
+.numberSize{
+    width: 100%;  
+    border-left: none;
+    outline: none;
+}
+.numberSize:focus{
+    border-top: 1px solid #ed5901;
+    border-bottom: 1px solid #ed5901;
+    border-right: 1px solid #ed5901;
+    border-left: none !important;
+}
+.nextButton{
+    background-color: #ed5901;
+    padding: 6px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    color: white;   
+    margin-top: 5px;
+    outline: none!important;
+}
+.borderFocused:focus{
+    outline: none;
+    border: 1px solid #ed5901 !important;
+}
+.selectedGenderType{
+    background-color: #fdeee6;
+    outline: none !important;
+    border: none !important; 
+    color:  #ed5901;   
+}
+.formattedTextColor{
+    color:  #ed5901;
+    outline: none !important;
+}
+md-select md-select-value{
+    border-bottom-color: white !important;
+}
+.imageUpload{   
+    border-radius: 50%;
+}
+.checkItems{
+    padding: 20px 30px 0px 30px !important;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+md-checkbox .md-icon{
+    border: 1px solid #bbb!important;
+    border-radius: 3px!important;
+}
+.successIconPopup{
+    background-color: #bbb;
+}
+.backButton{
+    background-color: #f4f6f7;
+    width: 120px;
+    padding: 10px;   
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    margin-right: 15px;
+}
+.sendButton{
+    background-color:  #ed5901;
+    width: 320px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 3px;
+    color: white;   
+}
+.sendButton:disabled, .nextButton:disabled{
+    background-color: #facdb3!important;
+    border: none;
+    outline: none;
+}
+.conditionsApply{
+   width: 420px;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.optContainer{
+    width: 450px;
+    height: 70px;
+}
+.otpField{
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    outline: none; 
+    height: inherit;
+    padding: 27px;   
+}
+.divider{
+    width: 100%;
+    border-bottom: 1px solid #d8d8d8;   
+}
+.messageWidth{
+    width: 515px;
+}
+.marginRight30{
+    margin-right: 25px!important;
+}
+.otpHeight{
+    height: inherit;
+}
+.countryFlag{
+    width: 40px;
+    height: 25px;
+}
+md-input-container{
+    margin: 0!important;
+}
+.marginRight10{
+    margin-right: 10px;
+}
+.phoneNumberFlag{
+    width: 25px;
+    height: 25px;
+}
+.md-select-value{
+    border-bottom-style: none!important;
+}
+.successIcon{
+    width: 80px;
+}
+.successPopup{
+    padding: 0px 150px;
+    background-color: #2e4b64 !important;
+    border-radius: 4px;
+}
+@media screen and (max-width: 600px) {
+    md-tab-item{
+       max-width: 100% !important;
+   }
+   .width350{
+     width: 250px !important;
+    }
+    .genderButton{
+        min-width: 70px !important;
+    }  
+    .sendButton{
+        width: 165px !important;
+    }  
+    .otpField{
+        padding: 10px!important;
+    }
+   
+}
