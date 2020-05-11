@@ -5,8 +5,7 @@
         <md-tab md-on-select="selfIndex.selectedIndex = 0">
           <md-tab-label layout="row">
             <div class="tabCount selectedTab" ng-if="selfIndex.selectedIndex === 0">1</div>
-            <div class="tabCount selectedTab"
-              ng-if="selfIndex.selectedIndex === 1 || selfIndex.selectedIndex === 2"><i
+            <div class="tabCount selectedTab" ng-if="selfIndex.selectedIndex === 1 || selfIndex.selectedIndex === 2"><i
                 class="fa fa-check" aria-hidden="true"></i></div>
             <span class="tabPadding">{{$root.constant.en.personalDetails}}</span>
           </md-tab-label>
@@ -36,7 +35,7 @@
                   <div class="width450 paddingBottom">{{$root.constant.en.country}}</div>
                   <md-input-container>
                     <md-select name="countryDetails" ng-model="picturesQueDetails.countryName" class="countrySelect"
-                      required md-no-asterisk id="countryName">
+                      required md-no-asterisk id="countryName" aria-hidden="true" aria-invalid="false">
                       <md-option ng-value="country" ng-repeat="country in countryDetails track by $index"
                         ng-click="selectState($index,country)">
                         <img ng-src={{country.flag}} class="countryFlag marginRight10">{{ country.name }}</md-option>
@@ -48,8 +47,8 @@
                 <div layout="column" class="formBackground">
                   <div class="width450 paddingBottom">{{$root.constant.en.state}}</div>
                   <md-input-container>
-                    <md-select ng-model="picturesQueDetails.stateName" class="countrySelect"
-                      ng-disabled="isShowStateField"  md-no-asterisk id="stateSelector" name="stateDetails">
+                    <md-select ng-model="picturesQueDetails.stateName" class="countrySelect" aria-hidden="true" aria-invalid="false"
+                      ng-disabled="isShowStateField" md-no-asterisk id="stateSelector" name="stateDetails">
                       <md-option ng-value="state" ng-repeat="state in selectedCountryState track by $index">
                         {{state}}</md-option>
                     </md-select>
@@ -97,11 +96,11 @@
           ng-disabled="!(picturesQueRegistration.name.$valid && picturesQueRegistration.genderTypeValue &&
         picturesQueRegistration.countryDetails.$valid && picturesQueRegistration.stateDetails.$valid && picturesQueRegistration.phoneNo.$valid)">
           <md-tab-label layout="row">
-            <div class="tabCount selectedTab"  ng-if="selfIndex.selectedIndex === 0 || selfIndex.selectedIndex === 1">2</div>
-            <div class="tabCount selectedTab"
-              ng-if="selfIndex.selectedIndex === 2"><i
-                class="fa fa-check" aria-hidden="true"></i></div>
-            <span class="tabPadding" >{{$root.constant.en.companyDetails}}</span>
+            <div class="tabCount selectedTab" ng-if="selfIndex.selectedIndex === 0 || selfIndex.selectedIndex === 1">2
+            </div>
+            <div class="tabCount selectedTab" ng-if="selfIndex.selectedIndex === 2"><i class="fa fa-check"
+                aria-hidden="true"></i></div>
+            <span class="tabPadding">{{$root.constant.en.companyDetails}}</span>
           </md-tab-label>
           <md-tab-body>
             <md-content class="md-padding">
@@ -109,9 +108,11 @@
               <div class="descriptionText paddingBottom20">{{$root.constant.en.companyDiscription}}</div>
               <div layout="column" layout-align="center center" flex>
                 <div layout="row" class="registrationForm" layout-align="center cneter">
-                  <div class="circle"><i class="fa fa-picture-o" aria-hidden="true"></i></div>
-                  <div class="formattedTextColor width450 " layout="row" layout-align="center center">
-                    {{$root.constant.en.companyLogo}}</div>
+                  <div class="circle"><img ng-src={{showCompanyLogo}} class="companyLogoCircle" id="logoImage"></div>
+                  <div class="formattedTextColor width450 " layout="row" layout-align="center center"
+                    ng-click="getCompanyLogo($event)">
+                    {{$root.constant.en.companyLogo}}</div><input type="file" accept=".png, .jpg, .jpeg" class="logo"
+                    id="companyLogo" />
                 </div>
                 <div layout="column" class="formBackground ">
                   <div class="width450 paddingBottom">{{$root.constant.en.companyName}}</div>
@@ -185,20 +186,25 @@
                 <div layout="column" class="registrationForm">
                   <div class="width450 paddingBottom">{{$root.constant.en.enterCode}}</div>
                   <div layout="row" layout-align="start center" class="width450 paddingBottom">
-                    <div flex="20" class="marginRight30 otpHeight"><input name="otp1" class="borderFocused otpField"
-                        ng-model="picturesQueDetails.otp.digit1" type="number" required maxlength="1">
+                    <div flex="20" class="marginRight30 otpHeight">
+                      <input id="password1" class="borderFocused otpField" ng-model="picturesQueDetails.otp.digit1"
+                        type="text" required maxlength="1" number name="otp1">
                     </div>
-                    <div flex="20" class="marginRight30 otpHeight"><input name="otp2" class="borderFocused otpField"
-                        ng-model="picturesQueDetails.otp.digit2" type="number" required maxlength="1">
+                    <div flex="20" class="marginRight30 otpHeight">
+                      <input class="borderFocused otpField" number ng-model="picturesQueDetails.otp.digit2" type="text"
+                        required maxlength="1" name="otp2" id="password2">
                     </div>
-                    <div flex="20" class="marginRight30 otpHeight"><input name="otp3" class="borderFocused otpField"
-                        ng-model="picturesQueDetails.otp.digit3" type="number" required maxlength="1">
+                    <div flex="20" class="marginRight30 otpHeight">
+                      <input class="borderFocused otpField" number ng-model="picturesQueDetails.otp.digit3" type="text"
+                        required maxlength="1" name="otp3" id="password3">
                     </div>
-                    <div flex="20" class="marginRight30 otpHeight"><input name="otp4" class="borderFocused otpField"
-                        ng-model="picturesQueDetails.otp.digit4" type="number" required maxlength="1">
+                    <div flex="20" class="marginRight30 otpHeight">
+                      <input class="borderFocused otpField" number ng-model="picturesQueDetails.otp.digit4" type="text"
+                        required maxlength="1" name="otp4" id="password4">
                     </div>
-                    <div flex="20" class="otpHeight"><input name="otp5" class="borderFocused otpField"
-                        ng-model="picturesQueDetails.otp.digit5" type="number" required maxlength="1">
+                    <div flex="20" class="otpHeight">
+                      <input class="borderFocused otpField" number ng-model="picturesQueDetails.otp.digit5" type="text"
+                        required maxlength="1" name="otp5" id="password5">
                     </div>
                   </div>{{picturesQueDetails.otp.digit1.$error}}
                   <div><span ng-if="picturesQueRegistration.otp1.$error.maxlength 
@@ -210,8 +216,10 @@
                   <div>
                     <button class="backButton" type="button"
                       ng-click="companyDetialsTab()">{{$root.constant.en.back}}</button></div>
-                  <div><button class="sendButton" type="submit"
-                      ng-click="verifyDetails(); getSuccessStateTemplate('registration_success');">{{$root.constant.en.verify}}</button>
+                  <div><button class="sendButton" type="submit" ng-click="verifyDetails(); 
+                    getSuccessStateTemplate('registration_success');"
+                    ng-disabled="!(picturesQueRegistration.otp1.$valid && picturesQueRegistration.otp2.$valid &&
+                    picturesQueRegistration.otp3.$valid  && picturesQueRegistration.otp4.$valid && picturesQueRegistration.otp5.$valid)">{{$root.constant.en.verify}}</button>
                   </div>
                 </div>
                 <div class="divider messageWidth"></div>

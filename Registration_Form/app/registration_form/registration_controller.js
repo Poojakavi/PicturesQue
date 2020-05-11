@@ -5,6 +5,7 @@
             $scope.genderTypes = [{ 'type': 'Male', 'isSelectedGenderType': false },
             { 'type': 'Female', 'isSelectedGenderType': false },
             { 'type': 'Other', 'isSelectedGenderType': false }];
+            $scope.picturesQueRegistration = {};
             $scope.picturesQueDetails = {};
             $scope.numberValue = "";
             $scope.countryDetails = {};
@@ -19,12 +20,17 @@
             $scope.optTypes = [1, 2, 3, 4, 5];
             $scope.picturesQueDetails.otp = {};
             $scope.numberDetails = {};
+            $scope.showCompanyLogo = "https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png";
+            $scope.stateContainedCountry = 191;
+            $scope.zero = 0;
+            $scope.countryCount = 0;
+
 
 
 
             $scope.init = function () {
                 countryDetails();
-                respectiveStateDetails();
+                respectiveStateDetails();               
             };
 
             /* Get method for home team */
@@ -51,8 +57,10 @@
             /* Select the Gender type */
             $scope.getGenderType = function (index) {
                 angular.forEach($scope.genderTypes, function (value, key) {
-                    if (key === index)
+                    if (key === index) {
                         value.isSelectedGenderType = true;
+                        return;
+                    }
                     else
                         value.isSelectedGenderType = false;
                 });
@@ -66,30 +74,25 @@
             /*Select Country Details */
             $scope.selectState = function (index, country) {
                 $scope.selectedCountryFlag = country.flag;
-                $scope.callingCode = country.callingCodes[0];   
+                $scope.callingCode = country.callingCodes[0];
                 angular.forEach($scope.stateDetails.countries, function (value, key) {
                     if (country.name === value.country) {
                         $scope.selectedCountryState = value.states;
+                        $scope.isSelectedCountryChanged = true;
                         if ($scope.selectedCountryState.length >= 1)
                             $scope.isShowStateField = false;
-                        else
-                            $scope.isShowStateField = true;
-                        $scope.picturesQueRegistration.stateName = "";
+                    }
+                    else {
+                        $scope.countryCount++;
                     }
                 });
+                if ($scope.countryCount === $scope.stateContainedCountry) {
+                    $scope.isShowStateField = true;
+                    $scope.selectedCountryState = "";
+                }
+                $scope.countryCount = $scope.zero;
             }
 
-            /* Convert given value into valid ticket count */
-            $scope.validNumber = function (element) {
-                var pattern = new RegExp(/^[0-9]*$/);
-                $scope.numberDetails = elementpicturesQueDetails.otp;
-                if (pattern.test(element.oneTimePassword))
-                    $scope.numberValue = element;
-                else if (number === undefined)
-                    element.oneTimePassword = "";
-                else
-                    element.oneTimePassword = $scope.numberValue;
-            }
             /*Change border color */
             $scope.changeBorder = function () {
                 $scope.isNumberEntered = true;
@@ -118,6 +121,23 @@
             $scope.getSuccessStateTemplate = function (templateState) {
                 $state.go(templateState);
             }
+            /* Get company logo */
+            $scope.getCompanyLogo = function (event) {
+                $("#companyLogo").trigger("click");
+            }
+
+            $(document).ready(function () {
+                $('input[type="file"]').change(function (e) {
+                    var fileName = e.target.files[0].name;
+                    var tmppath = URL.createObjectURL(event.target.files[0]);
+                    $("#logoImage").fadeIn("fast").attr('src', URL.createObjectURL(event.target.files[0]));
+                    $("#logoImage").html(tmppath);
+                    $scope.showCompanyLogo = tmppath;
+                    $scope.picturesQueDetails.companyLogo = tmppath;
+
+                });
+            });
+
             $scope.init();
         }]);
 })();
